@@ -1,0 +1,22 @@
+<div id="conteinerCart" class="d-flex justify-content-center p-4">
+</div>
+{{#if productsFile}}
+    <div class="conteiner-fluid d-flex flex-column align-items-center">
+        {{#each productsFile.results}}
+        <div class="card text-center" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{title}}</h5>
+                <p class="card-text">{{description}}</p>
+                <p class="card-text">Talle: {{size}}</p>
+                <h6 class="card-text">${{price}}</h6>
+                <button class="btn btn-lg btn-outline-primary" onclick="addProduct('{{_id}}')">Comprar</button>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+{{else}}
+    <p>No tenemos productos</p>
+{{/if}}
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/index.js"></script>

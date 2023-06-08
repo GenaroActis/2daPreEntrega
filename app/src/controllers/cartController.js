@@ -49,16 +49,15 @@ export const deleteProductToCartController = async (req, res, next) =>{
         next(error)
     };
 };
-export const deleteCartController = async (req, res, next) =>{
+export const deleteAllProductsToCartController = async (req, res, next) =>{
     try {
         const cartId = req.params.cartId;
-        const cartFind = await cartDao.getCart(cartId);
-        if(!cartFind) {
-            res.status(404).json('error: the cart you are trying to remove does not exist')
-        }else{
-            const cartToDelete = await cartDao.deleteCart(cartId)
-            res.json(`cart with id ${cartId} successfully removed`)
-        };
+        const cartToDelete = await cartDao.deleteAllProductsToCart(cartId)
+        // if(!cartToDelete){
+        //     res.status(404).json('error: request failed')
+        // } else{
+            res.json(`cart with id ${cartId} successfully products removed`)
+        // }
     } catch (error) {
         next(error)
     };

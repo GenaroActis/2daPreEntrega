@@ -66,10 +66,17 @@ export default class CartsDaoMongoDB {
             console.log(error)
         };
     };
-    async deleteCart (cartId) {
+    async deleteAllProductsToCart (cartId) {
         try {
-            const cartToDelete = await CartsModel.findByIdAndDelete(cartId)
-            return cartToDelete
+            const cartFind = await CartsModel.findById(cartId);
+            if(!cartFind){
+                throw new Error('the cart you are trying to update does not exist')
+            } else{
+                await CartsModel.updateOne(
+                    { _id: cartId },
+                    { $set: { products: [] } }
+                );
+            };
         } catch (error) {
             console.log(error)
         };
